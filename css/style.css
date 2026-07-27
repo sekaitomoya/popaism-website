@@ -483,6 +483,82 @@ button { font-family: inherit; cursor: pointer; }
   line-height: 1.85;
 }
 
+/* --- SERVICES: 2事業レイアウト --- */
+.service-grid--duo {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 1040px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+.service-list {
+  margin-top: 24px;
+  border-top: 1px solid var(--gray-light);
+}
+.service-list li {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--gray-light);
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.8;
+}
+.service-list li strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--dark);
+  margin-bottom: 2px;
+}
+.service-list li strong::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--jade);
+  margin-right: 10px;
+  vertical-align: 0.1em;
+}
+.service-target {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  color: #12BFC0;
+  border: 1px solid rgba(18,191,192,0.35);
+  background: rgba(18,191,192,0.06);
+  padding: 4px 14px;
+  border-radius: 100px;
+  margin-bottom: 16px;
+}
+.service-card--bp {
+  display: block;
+  border-color: rgba(18,191,192,0.2);
+}
+.service-card--bp::before {
+  background: linear-gradient(90deg, #12BFC0, #178EFC, #4B4ACF, #6B2BC9);
+}
+.service-card--bp:hover {
+  box-shadow: 0 24px 60px rgba(18,191,192,0.18);
+  border-color: rgba(18,191,192,0.45);
+}
+.service-card--bp .service-number { color: rgba(18,191,192,0.16); }
+.service-en--bp { color: #12BFC0; }
+.service-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--dark);
+  border-bottom: 2px solid #12BFC0;
+  padding-bottom: 4px;
+  transition: color 0.2s, gap 0.2s;
+}
+.service-card--bp:hover .service-card-cta {
+  color: #12BFC0;
+  gap: 12px;
+}
+
 
 /* ============================================
    6. PHILOSOPHY (P.O.P.A.I + ism)
