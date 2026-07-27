@@ -1,9 +1,10 @@
 /* ============================================
    Best Process LP — bp.js
-   GSAP 3.x + ScrollTrigger
+   GSAP 3.x + ScrollTrigger (progressive enhancement)
    ============================================ */
 
-gsap.registerPlugin(ScrollTrigger);
+const bpHasGsap = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
+if (bpHasGsap) gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -17,6 +18,41 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
   }
+
+  /* ===== COST simulator ===== */
+  const costSim = document.getElementById('bp-cost-sim');
+  const costTotal = document.getElementById('bp-cost-total-val');
+  if (costSim && costTotal) {
+    const fields = costSim.querySelectorAll('.bp-cost-field');
+    const toHalfWidth = s => s.replace(/[０-９．]/g, ch => '0123456789.'['０１２３４５６７８９．'.indexOf(ch)]);
+    const update = () => {
+      let total = 0;
+      fields.forEach(f => {
+        const v = parseFloat(toHalfWidth(f.value).replace(/[^0-9.]/g, ''));
+        if (!Number.isNaN(v)) total += v;
+      });
+      const rounded = Math.round(total * 10) / 10;
+      costTotal.textContent = rounded.toLocaleString('ja-JP');
+    };
+    fields.forEach(f => f.addEventListener('input', update));
+    update();
+  }
+
+  /* ===== Smooth in-page scroll (offset for fixed nav) ===== */
+  const NAV_OFFSET = 80;
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const href = a.getAttribute('href');
+      if (!href || href === '#') return;
+      const target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      const top = target.getBoundingClientRect().top + window.scrollY - NAV_OFFSET;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+
+  if (!bpHasGsap) return;
 
   /* ===== HERO: entrance animation ===== */
   gsap.from('.hero-circle, .hero-circle-outline, .hero-circle-small', {
@@ -134,21 +170,21 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ===== PRICE cards ===== */
-  gsap.set('.bp-setup-card', { opacity: 0, y: 40 });
-  gsap.to('.bp-setup-card', {
-    scrollTrigger: { trigger: '.bp-setup-card', start: 'top 82%' },
-    opacity: 1,
-    y: 0,
-    duration: 0.8,
-    ease: 'power2.out',
-    overwrite: 'auto'
-  });
   gsap.set('.bp-plan-card', { opacity: 0, y: 50 });
   gsap.to('.bp-plan-card', {
     scrollTrigger: { trigger: '.bp-plan-grid', start: 'top 80%' },
     opacity: 1,
     y: 0,
     stagger: 0.12,
+    duration: 0.8,
+    ease: 'power2.out',
+    overwrite: 'auto'
+  });
+  gsap.set('.bp-includes-band', { opacity: 0, y: 40 });
+  gsap.to('.bp-includes-band', {
+    scrollTrigger: { trigger: '.bp-includes-band', start: 'top 85%' },
+    opacity: 1,
+    y: 0,
     duration: 0.8,
     ease: 'power2.out',
     overwrite: 'auto'
@@ -176,20 +212,6 @@ document.addEventListener('DOMContentLoaded', () => {
     duration: 0.75,
     ease: 'power2.out',
     overwrite: 'auto'
-  });
-
-  /* ===== Smooth in-page scroll (offset for fixed nav) ===== */
-  const NAV_OFFSET = 80;
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const href = a.getAttribute('href');
-      if (!href || href === '#') return;
-      const target = document.querySelector(href);
-      if (!target) return;
-      e.preventDefault();
-      const top = target.getBoundingClientRect().top + window.scrollY - NAV_OFFSET;
-      window.scrollTo({ top, behavior: 'smooth' });
-    });
   });
 
 });

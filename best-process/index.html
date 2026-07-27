@@ -189,16 +189,17 @@
         <div class="bp-cost-card">
           <span class="bp-cost-card-label">Before</span>
           <h3 class="bp-cost-card-title">バラバラに発注している場合</h3>
-          <ul class="bp-cost-list">
-            <li>広告の運用手数料<span class="bp-cost-amount">＿＿＿万円</span></li>
-            <li>チラシ（デザイン・印刷・折込）<span class="bp-cost-amount">＿＿＿万円</span></li>
-            <li>ポータルサイト掲載<span class="bp-cost-amount">＿＿＿万円</span></li>
-            <li>予約システムなどのツール<span class="bp-cost-amount">＿＿＿万円</span></li>
-            <li>反響対応・追客の人件費<span class="bp-cost-amount">＿＿＿万円</span></li>
-            <li>HPの保守・管理／制作・更新<span class="bp-cost-amount">＿＿＿万円</span></li>
-            <li>集客コンサル・顧問<span class="bp-cost-amount">＿＿＿万円</span></li>
+          <p class="bp-cost-hint">それぞれの費用（万円）を入力すると、合計が表示されます。</p>
+          <ul class="bp-cost-list" id="bp-cost-sim">
+            <li><label for="bp-cost-1">広告の運用手数料</label><span class="bp-cost-amount"><input type="text" inputmode="decimal" class="bp-cost-field" id="bp-cost-1" placeholder="0" aria-label="広告の運用手数料（万円）">万円</span></li>
+            <li><label for="bp-cost-2">チラシ（デザイン・印刷・折込）</label><span class="bp-cost-amount"><input type="text" inputmode="decimal" class="bp-cost-field" id="bp-cost-2" placeholder="0" aria-label="チラシ費用（万円）">万円</span></li>
+            <li><label for="bp-cost-3">ポータルサイト掲載</label><span class="bp-cost-amount"><input type="text" inputmode="decimal" class="bp-cost-field" id="bp-cost-3" placeholder="0" aria-label="ポータルサイト掲載費（万円）">万円</span></li>
+            <li><label for="bp-cost-4">予約システムなどのツール</label><span class="bp-cost-amount"><input type="text" inputmode="decimal" class="bp-cost-field" id="bp-cost-4" placeholder="0" aria-label="予約システムなどのツール費（万円）">万円</span></li>
+            <li><label for="bp-cost-5">反響対応・追客の人件費</label><span class="bp-cost-amount"><input type="text" inputmode="decimal" class="bp-cost-field" id="bp-cost-5" placeholder="0" aria-label="反響対応・追客の人件費（万円）">万円</span></li>
+            <li><label for="bp-cost-6">HPの保守・管理／制作・更新</label><span class="bp-cost-amount"><input type="text" inputmode="decimal" class="bp-cost-field" id="bp-cost-6" placeholder="0" aria-label="HPの保守・管理／制作・更新費（万円）">万円</span></li>
+            <li><label for="bp-cost-7">集客コンサル・顧問</label><span class="bp-cost-amount"><input type="text" inputmode="decimal" class="bp-cost-field" id="bp-cost-7" placeholder="0" aria-label="集客コンサル・顧問費（万円）">万円</span></li>
           </ul>
-          <p class="bp-cost-total">合計<span>＿＿＿万円/月</span></p>
+          <p class="bp-cost-total">合計<span><span class="bp-cost-total-val" id="bp-cost-total-val">0</span><span class="bp-cost-total-unit">万円/月</span></span></p>
         </div>
         <div class="bp-cost-card bp-cost-card--after bp-c-teal">
           <span class="bp-cost-card-label">After</span>
@@ -312,21 +313,24 @@
       <div class="bp-shots">
         <h3 class="bp-shots-title">実際の画面イメージ</h3>
         <div class="bp-shots-grid">
-          <!-- 画像支給後に assets/bp/shot-booking-pc.png 等へ差し替え -->
           <figure class="bp-shot">
-            <div class="bp-shot-ph" role="img" aria-label="予約サイト（PC）のスクリーンショット 準備中">COMING SOON</div>
-            <figcaption>予約サイト（PC）</figcaption>
+            <img class="bp-shot-img" src="/assets/bp/shot-form-pc.png" alt="予約フォーム（PC）の画面イメージ" loading="lazy" onerror="this.closest('.bp-shot').classList.add('bp-shot--missing')">
+            <div class="bp-shot-ph" aria-hidden="true">COMING SOON</div>
+            <figcaption>予約フォーム（PC）</figcaption>
           </figure>
           <figure class="bp-shot">
-            <div class="bp-shot-ph" role="img" aria-label="予約サイト（スマートフォン）のスクリーンショット 準備中">COMING SOON</div>
+            <img class="bp-shot-img" src="/assets/bp/shot-site-sp.png" alt="予約サイト（スマートフォン）の画面イメージ" loading="lazy" onerror="this.closest('.bp-shot').classList.add('bp-shot--missing')">
+            <div class="bp-shot-ph" aria-hidden="true">COMING SOON</div>
             <figcaption>予約サイト（スマホ）</figcaption>
           </figure>
           <figure class="bp-shot">
-            <div class="bp-shot-ph" role="img" aria-label="予約カレンダーのスクリーンショット 準備中">COMING SOON</div>
+            <img class="bp-shot-img" src="/assets/bp/shot-calendar.png" alt="予約カレンダーの画面イメージ" loading="lazy" onerror="this.closest('.bp-shot').classList.add('bp-shot--missing')">
+            <div class="bp-shot-ph" aria-hidden="true">COMING SOON</div>
             <figcaption>予約カレンダー</figcaption>
           </figure>
           <figure class="bp-shot">
-            <div class="bp-shot-ph" role="img" aria-label="月次レポートのスクリーンショット 準備中">COMING SOON</div>
+            <img class="bp-shot-img" src="/assets/bp/shot-report.png" alt="月次レポートの画面イメージ" loading="lazy" onerror="this.closest('.bp-shot').classList.add('bp-shot--missing')">
+            <div class="bp-shot-ph" aria-hidden="true">COMING SOON</div>
             <figcaption>月次レポート</figcaption>
           </figure>
         </div>
@@ -359,29 +363,7 @@
       <div class="section-header">
         <span class="section-eyebrow">PRICE</span>
         <h2 class="section-title">料金</h2>
-        <p class="section-lead">運用を始める前に、まず「仕組み」をゼロから作ります。</p>
-      </div>
-
-      <div class="bp-setup-card">
-        <div>
-          <span class="bp-setup-label">導線構築費用</span>
-          <p class="bp-setup-price">
-            <span class="bp-price-strike">通常 30万円</span><br>
-            <strong>10</strong><span class="bp-price-unit">万円</span>
-            <span class="bp-setup-cond">※月額プランを6ヶ月以上ご継続の場合</span>
-          </p>
-        </div>
-        <div>
-          <p class="bp-setup-includes-title">含まれるもの</p>
-          <ul class="bp-setup-includes">
-            <li>キックオフMTG</li>
-            <li>市場調査/競合調査</li>
-            <li>専用LP構築</li>
-            <li>予約フォーム構築</li>
-            <li>MEO・SEO・AIO初期整備</li>
-            <li>Googleマップ登録・口コミ返信体制の構築</li>
-          </ul>
-        </div>
+        <p class="section-lead">3つのプランは、対応範囲の広さで分かれています。</p>
       </div>
 
       <div class="bp-plan-grid">
@@ -422,9 +404,20 @@
         </article>
       </div>
 
+      <div class="bp-includes-band">
+        <p class="bp-includes-title">導入時に、すべてのプランに含まれるもの</p>
+        <ul class="bp-includes-list">
+          <li>キックオフMTG</li>
+          <li>市場調査/競合調査</li>
+          <li>専用LP構築</li>
+          <li>予約フォーム構築</li>
+          <li>MEO・SEO・AIO初期整備</li>
+          <li>Googleマップ登録・口コミ返信体制の構築</li>
+        </ul>
+      </div>
+
       <ul class="bp-price-notes">
         <li>広告費は媒体へ直接お支払いいただきます。弊社経由の上乗せはありません（月30万円を超える分のみ20%）。</li>
-        <li>導線構築費用10万円は、月額プランを6ヶ月以上ご継続いただく場合の価格です（通常30万円）。</li>
         <li>表示価格はすべて税別です。</li>
       </ul>
     </div>
@@ -453,8 +446,8 @@
         </li>
         <li class="process-step bp-c-indigo">
           <span class="process-step-num">03</span>
-          <h3 class="process-step-title">ご契約・お支払い</h3>
-          <p class="process-step-desc">導線構築費用と初月分をお支払いいただきます。</p>
+          <h3 class="process-step-title">ご契約</h3>
+          <p class="process-step-desc">ご契約手続きの後、導線構築に着手します。</p>
           <span class="process-step-time">契約時</span>
         </li>
         <li class="process-step bp-c-purple">
