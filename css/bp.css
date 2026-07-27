@@ -50,6 +50,15 @@
   border-color: rgba(18,191,192,0.4);
 }
 .bp .service-number { color: rgba(18,191,192,0.16); }
+/* 並列カードはアイコン・番号・英字ラベルを同一色で識別 */
+.bp .service-card.bp-c-teal   .service-number { color: rgba(18,191,192,0.16); }
+.bp .service-card.bp-c-blue   .service-number { color: rgba(23,142,252,0.16); }
+.bp .service-card.bp-c-indigo .service-number { color: rgba(75,74,207,0.16); }
+.bp .service-card.bp-c-purple .service-number { color: rgba(107,43,201,0.16); }
+.bp .service-card.bp-c-teal   .service-en,
+.bp .service-card.bp-c-blue   .service-en,
+.bp .service-card.bp-c-indigo .service-en,
+.bp .service-card.bp-c-purple .service-en { color: var(--step); }
 
 .bp .cta-section { background: var(--teal); }
 .bp .cta-blob { background: radial-gradient(circle, var(--blue) 0%, transparent 65%); }
