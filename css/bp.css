@@ -153,10 +153,12 @@
   border-radius: 50%;
   background: var(--step-soft, rgba(18,191,192,0.08));
   color: var(--step, var(--teal));
-  font-family: 'Inter', sans-serif;
-  font-weight: 900;
-  font-size: 22px;
   margin-bottom: 22px;
+}
+.bp-problem-icon svg {
+  width: 28px;
+  height: 28px;
+  display: block;
 }
 .bp-cause-band {
   margin-top: 48px;
