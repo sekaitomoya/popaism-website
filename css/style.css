@@ -518,6 +518,9 @@ button { font-family: inherit; cursor: pointer; }
   margin-right: 10px;
   vertical-align: 0.1em;
 }
+.service-list--bp li:nth-child(1) strong::before { background: #12BFC0; }
+.service-list--bp li:nth-child(2) strong::before { background: #178EFC; }
+.service-list--bp li:nth-child(3) strong::before { background: #6B2BC9; }
 .service-target {
   display: inline-block;
   font-size: 12px;
