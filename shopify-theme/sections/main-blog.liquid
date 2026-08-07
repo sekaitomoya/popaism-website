@@ -1,0 +1,42 @@
+<div class="blog section-spacing page-width">
+  <header class="collection__header">
+    <h1 class="collection__title">{{ blog.title }}</h1>
+  </header>
+
+  {%- paginate blog.articles by 12 -%}
+    <div class="blog__grid">
+      {%- for article in blog.articles -%}
+        <a href="{{ article.url }}" class="blog__card">
+          <div class="blog__media">
+            {%- if article.image -%}
+              <img
+                src="{{ article.image | image_url: width: 720 }}"
+                alt="{{ article.title | escape }}"
+                loading="lazy"
+                width="{{ article.image.width }}"
+                height="{{ article.image.height }}"
+              >
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+          <div class="blog__card-info">
+            <time class="blog__date" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+              {{ article.published_at | date: '%Y.%m.%d' }}
+            </time>
+            <span class="blog__card-title">{{ article.title }}</span>
+            <p class="blog__excerpt">{{ article.excerpt_or_content | strip_html | truncate: 80 }}</p>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+    {% render 'pagination', paginate: paginate %}
+  {%- endpaginate -%}
+</div>
+
+{% schema %}
+{
+  "name": "ブログ",
+  "settings": []
+}
+{% endschema %}

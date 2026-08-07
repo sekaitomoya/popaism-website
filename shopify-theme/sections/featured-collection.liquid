@@ -1,0 +1,56 @@
+{%- liquid
+  assign collection = collections[section.settings.collection]
+-%}
+<div class="featured-collection section-spacing">
+  <div class="page-width">
+    <div class="section-header">
+      <h2 class="section-header__title">
+        {{ section.settings.title | default: collection.title | escape }}
+      </h2>
+      {%- if section.settings.show_view_all and collection != blank -%}
+        <a href="{{ collection.url }}" class="section-header__link">
+          {{ 'sections.featured_collection.view_all' | t }} {% render 'icon', name: 'chevron-right' %}
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="product-grid product-grid--{{ section.settings.columns }}-col{% if section.settings.carousel_mobile %} product-grid--carousel-mobile{% endif %}">
+      {%- if collection != blank -%}
+        {%- for product in collection.products limit: section.settings.products_to_show -%}
+          {% render 'product-card', product: product %}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..section.settings.products_to_show) -%}
+          <div class="product-card">
+            <div class="product-card__media product-card__media--{{ settings.card_image_ratio }}">
+              {%- assign placeholder = 'product-apparel-' | append: forloop.index -%}
+              {{ placeholder | placeholder_svg_tag: 'product-card__image placeholder-svg' }}
+            </div>
+            <div class="product-card__info">
+              <span class="product-card__vendor">BRAND</span>
+              <span class="product-card__title">{{ 'sections.featured_collection.placeholder_title' | t }}</span>
+              <div class="product-card__price"><span class="price__current">¥10,000</span></div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "注目コレクション",
+  "settings": [
+    { "type": "text", "id": "title", "label": "見出し", "default": "NEW ARRIVALS" },
+    { "type": "collection", "id": "collection", "label": "コレクション" },
+    { "type": "range", "id": "products_to_show", "label": "表示する商品数", "min": 2, "max": 12, "step": 1, "default": 8 },
+    { "type": "range", "id": "columns", "label": "列数（PC）", "min": 2, "max": 5, "step": 1, "default": 4 },
+    { "type": "checkbox", "id": "show_view_all", "label": "「すべて見る」リンクを表示", "default": true },
+    { "type": "checkbox", "id": "carousel_mobile", "label": "モバイルで横スクロール表示", "default": true }
+  ],
+  "presets": [
+    { "name": "注目コレクション" }
+  ]
+}
+{% endschema %}

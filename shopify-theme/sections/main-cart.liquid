@@ -1,0 +1,100 @@
+<div class="cart section-spacing page-width">
+  <header class="collection__header">
+    <h1 class="collection__title">{{ 'cart.general.title' | t }}</h1>
+  </header>
+
+  {%- if cart.item_count > 0 -%}
+    <form action="{{ routes.cart_url }}" method="post" class="cart__form">
+      <table class="cart__table">
+        <thead>
+          <tr>
+            <th colspan="2">{{ 'cart.general.product' | t }}</th>
+            <th>{{ 'cart.general.price' | t }}</th>
+            <th>{{ 'cart.general.quantity' | t }}</th>
+            <th>{{ 'cart.general.total' | t }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for item in cart.items -%}
+            <tr class="cart__row">
+              <td class="cart__media">
+                <a href="{{ item.url }}">
+                  {%- if item.image -%}
+                    <img
+                      src="{{ item.image | image_url: width: 240 }}"
+                      alt="{{ item.title | escape }}"
+                      loading="lazy"
+                      width="120"
+                      height="120"
+                    >
+                  {%- endif -%}
+                </a>
+              </td>
+              <td class="cart__details">
+                {%- if item.product.vendor != blank -%}
+                  <span class="product-card__vendor">{{ item.product.vendor }}</span>
+                {%- endif -%}
+                <a href="{{ item.url }}" class="cart__item-title">{{ item.product.title }}</a>
+                {%- unless item.product.has_only_default_variant -%}
+                  <p class="cart__item-variant">{{ item.variant.title }}</p>
+                {%- endunless -%}
+                <a href="{{ item.url_to_remove }}" class="cart__remove">
+                  {% render 'icon', name: 'trash' %} {{ 'cart.general.remove' | t }}
+                </a>
+              </td>
+              <td class="cart__price" data-label="{{ 'cart.general.price' | t }}">{{ item.final_price | money }}</td>
+              <td class="cart__quantity" data-label="{{ 'cart.general.quantity' | t }}">
+                <div class="quantity-input">
+                  <input
+                    type="number"
+                    name="updates[]"
+                    value="{{ item.quantity }}"
+                    min="0"
+                    aria-label="{{ 'cart.general.quantity' | t }}"
+                  >
+                </div>
+              </td>
+              <td class="cart__line-total" data-label="{{ 'cart.general.total' | t }}">{{ item.final_line_price | money }}</td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+
+      <div class="cart__footer">
+        {%- if section.settings.show_note -%}
+          <div class="cart__note">
+            <label for="CartNote">{{ 'cart.general.note' | t }}</label>
+            <textarea name="note" id="CartNote" rows="3">{{ cart.note }}</textarea>
+          </div>
+        {%- endif -%}
+        <div class="cart__summary">
+          <div class="cart__subtotal">
+            <span>{{ 'cart.general.subtotal' | t }}</span>
+            <span class="cart__subtotal-price">{{ cart.total_price | money }}</span>
+          </div>
+          <p class="cart__tax-note">{{ 'cart.general.tax_note' | t }}</p>
+          <div class="cart__buttons">
+            <button type="submit" name="update" class="button button--secondary">{{ 'cart.general.update' | t }}</button>
+            <button type="submit" name="checkout" class="button button--primary">{{ 'cart.general.checkout' | t }}</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  {%- else -%}
+    <div class="cart__empty">
+      <p>{{ 'cart.general.empty' | t }}</p>
+      <a href="{{ routes.all_products_collection_url }}" class="button button--primary">
+        {{ 'cart.general.continue_shopping' | t }}
+      </a>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "カート",
+  "settings": [
+    { "type": "checkbox", "id": "show_note", "label": "備考欄を表示", "default": true }
+  ]
+}
+{% endschema %}

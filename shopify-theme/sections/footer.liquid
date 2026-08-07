@@ -1,0 +1,78 @@
+<footer class="footer">
+  <div class="footer__main page-width">
+    <div class="footer__column footer__column--about">
+      <span class="footer__heading">{{ shop.name }}</span>
+      {%- if section.settings.about_text != blank -%}
+        <div class="footer__text rte">{{ section.settings.about_text }}</div>
+      {%- endif -%}
+      <div class="footer__social">
+        {%- if settings.social_instagram != blank -%}
+          <a href="{{ settings.social_instagram }}" target="_blank" rel="noopener" aria-label="Instagram">{% render 'icon', name: 'instagram' %}</a>
+        {%- endif -%}
+        {%- if settings.social_line != blank -%}
+          <a href="{{ settings.social_line }}" target="_blank" rel="noopener" aria-label="LINE">{% render 'icon', name: 'line' %}</a>
+        {%- endif -%}
+        {%- if settings.social_twitter != blank -%}
+          <a href="{{ settings.social_twitter }}" target="_blank" rel="noopener" aria-label="X">{% render 'icon', name: 'twitter' %}</a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if section.settings.menu != blank -%}
+      <div class="footer__column">
+        <span class="footer__heading">{{ 'general.footer.menu' | t }}</span>
+        <ul class="footer__menu">
+          {%- for link in section.settings.menu.links -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.show_newsletter -%}
+      <div class="footer__column footer__column--newsletter">
+        <span class="footer__heading">{{ 'general.newsletter.heading' | t }}</span>
+        <p class="footer__text">{{ section.settings.newsletter_text | escape }}</p>
+        {%- form 'customer', class: 'footer__newsletter-form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="footer__newsletter-field">
+            <input
+              type="email"
+              name="contact[email]"
+              placeholder="{{ 'general.newsletter.email_placeholder' | t }}"
+              aria-label="{{ 'general.newsletter.email_placeholder' | t }}"
+              required
+            >
+            <button type="submit" class="button button--primary">{{ 'general.newsletter.submit' | t }}</button>
+          </div>
+          {%- if form.posted_successfully? -%}
+            <p class="footer__newsletter-success">{{ 'general.newsletter.success' | t }}</p>
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="footer__bottom page-width">
+    <ul class="footer__policies">
+      {%- for policy in shop.policies -%}
+        {%- if policy != blank -%}
+          <li><a href="{{ policy.url }}">{{ policy.title }}</a></li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+    <p class="footer__copyright">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "フッター",
+  "settings": [
+    { "type": "richtext", "id": "about_text", "label": "ショップ紹介文", "default": "<p>国内外のブランドにこだわらず、常に最新のトレンドをキャッチ。固定観念にとらわれない視点でセレクトしたアイテムをお届けします。</p>" },
+    { "type": "link_list", "id": "menu", "label": "フッターメニュー", "default": "footer" },
+    { "type": "checkbox", "id": "show_newsletter", "label": "ニュースレター登録を表示", "default": true },
+    { "type": "text", "id": "newsletter_text", "label": "ニュースレター説明文", "default": "新着アイテムやセール情報をいち早くお届けします。" }
+  ]
+}
+{% endschema %}

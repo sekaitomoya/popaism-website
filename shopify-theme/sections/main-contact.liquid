@@ -1,0 +1,42 @@
+<div class="contact section-spacing page-width page--narrow">
+  <header class="collection__header">
+    <h1 class="collection__title">{{ page.title | default: 'contact.form.title' | t }}</h1>
+  </header>
+
+  {%- if page.content != blank -%}
+    <div class="rte contact__intro">{{ page.content }}</div>
+  {%- endif -%}
+
+  {%- form 'contact', class: 'contact__form' -%}
+    {%- if form.posted_successfully? -%}
+      <p class="form__success">{{ 'contact.form.success' | t }}</p>
+    {%- elsif form.errors -%}
+      <p class="form__error">{{ 'contact.form.error' | t }}</p>
+    {%- endif -%}
+
+    <div class="form__field">
+      <label for="ContactName">{{ 'contact.form.name' | t }}</label>
+      <input type="text" id="ContactName" name="contact[name]" value="{{ form.name }}" required>
+    </div>
+    <div class="form__field">
+      <label for="ContactEmail">{{ 'contact.form.email' | t }}</label>
+      <input type="email" id="ContactEmail" name="contact[email]" value="{{ form.email }}" required>
+    </div>
+    <div class="form__field">
+      <label for="ContactPhone">{{ 'contact.form.phone' | t }}</label>
+      <input type="tel" id="ContactPhone" name="contact[phone]" value="{{ form.phone }}">
+    </div>
+    <div class="form__field">
+      <label for="ContactBody">{{ 'contact.form.message' | t }}</label>
+      <textarea id="ContactBody" name="contact[body]" rows="6" required>{{ form.body }}</textarea>
+    </div>
+    <button type="submit" class="button button--primary">{{ 'contact.form.send' | t }}</button>
+  {%- endform -%}
+</div>
+
+{% schema %}
+{
+  "name": "お問い合わせ",
+  "settings": []
+}
+{% endschema %}

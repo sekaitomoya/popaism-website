@@ -1,0 +1,56 @@
+{%- comment -%}
+  使い方: {% render 'product-card', product: product %}
+{%- endcomment -%}
+<div class="product-card">
+  <a href="{{ product.url }}" class="product-card__link" aria-label="{{ product.title | escape }}">
+    <div class="product-card__media product-card__media--{{ settings.card_image_ratio }}">
+      {%- if product.featured_media -%}
+        <img
+          class="product-card__image"
+          srcset="{{ product.featured_media | image_url: width: 360 }} 360w, {{ product.featured_media | image_url: width: 540 }} 540w, {{ product.featured_media | image_url: width: 720 }} 720w"
+          sizes="(min-width: 990px) 25vw, 50vw"
+          src="{{ product.featured_media | image_url: width: 540 }}"
+          alt="{{ product.featured_media.alt | default: product.title | escape }}"
+          loading="lazy"
+          width="{{ product.featured_media.width }}"
+          height="{{ product.featured_media.height }}"
+        >
+        {%- if settings.card_hover_image and product.media[1] -%}
+          <img
+            class="product-card__image product-card__image--hover"
+            src="{{ product.media[1] | image_url: width: 540 }}"
+            alt=""
+            loading="lazy"
+            width="{{ product.media[1].width }}"
+            height="{{ product.media[1].height }}"
+          >
+        {%- endif -%}
+      {%- else -%}
+        {{ 'product-apparel-1' | placeholder_svg_tag: 'product-card__image placeholder-svg' }}
+      {%- endif -%}
+
+      {%- unless product.available -%}
+        <span class="product-card__badge product-card__badge--sold-out">{{ 'products.product.sold_out' | t }}</span>
+      {%- else -%}
+        {%- if product.compare_at_price > product.price -%}
+          <span class="product-card__badge product-card__badge--sale">{{ 'products.product.on_sale' | t }}</span>
+        {%- endif -%}
+      {%- endunless -%}
+    </div>
+
+    <div class="product-card__info">
+      {%- if settings.card_show_vendor and product.vendor != blank -%}
+        <span class="product-card__vendor">{{ product.vendor }}</span>
+      {%- endif -%}
+      <span class="product-card__title">{{ product.title }}</span>
+      <div class="product-card__price">
+        {%- if product.compare_at_price > product.price -%}
+          <s class="price__compare">{{ product.compare_at_price | money }}</s>
+          <span class="price__current price__current--sale">{{ product.price | money }}</span>
+        {%- else -%}
+          <span class="price__current">{{ product.price | money }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+  </a>
+</div>

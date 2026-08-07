@@ -1,0 +1,22 @@
+{%- comment -%}
+  使い方: {% render 'price', product: product %} または {% render 'price', variant: variant %}
+{%- endcomment -%}
+{%- liquid
+  if variant
+    assign target = variant
+  else
+    assign target = product.selected_or_first_available_variant | default: product
+  endif
+  assign price = target.price
+  assign compare_at = target.compare_at_price
+-%}
+<div class="price{% if compare_at > price %} price--on-sale{% endif %}">
+  {%- if compare_at > price -%}
+    <s class="price__compare">{{ compare_at | money }}</s>
+    <span class="price__current price__current--sale">{{ price | money }}</span>
+    <span class="price__badge-sale">{{ 'products.product.on_sale' | t }}</span>
+  {%- else -%}
+    <span class="price__current">{{ price | money }}</span>
+  {%- endif -%}
+  <span class="price__tax-note">{{ 'products.product.tax_included' | t }}</span>
+</div>

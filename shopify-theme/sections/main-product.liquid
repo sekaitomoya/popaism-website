@@ -1,0 +1,154 @@
+<div class="product section-spacing page-width" data-product>
+  <div class="product__grid">
+    <div class="product__gallery" data-product-gallery>
+      <div class="product__main-image">
+        {%- if product.media.size > 0 -%}
+          {%- for media in product.media -%}
+            <img
+              class="product__image{% if forloop.first %} is-active{% endif %}"
+              data-media-index="{{ forloop.index0 }}"
+              srcset="{{ media | image_url: width: 720 }} 720w, {{ media | image_url: width: 1080 }} 1080w, {{ media | image_url: width: 1440 }} 1440w"
+              sizes="(min-width: 990px) 50vw, 100vw"
+              src="{{ media | image_url: width: 1080 }}"
+              alt="{{ media.alt | default: product.title | escape }}"
+              {% if forloop.first %}loading="eager"{% else %}loading="lazy"{% endif %}
+              width="{{ media.width }}"
+              height="{{ media.height }}"
+            >
+          {%- endfor -%}
+        {%- else -%}
+          {{ 'product-apparel-1' | placeholder_svg_tag: 'product__image is-active placeholder-svg' }}
+        {%- endif -%}
+      </div>
+      {%- if product.media.size > 1 -%}
+        <div class="product__thumbnails">
+          {%- for media in product.media -%}
+            <button
+              class="product__thumbnail{% if forloop.first %} is-active{% endif %}"
+              data-thumbnail-index="{{ forloop.index0 }}"
+              aria-label="{{ 'products.product.media_thumbnail' | t: index: forloop.index }}"
+            >
+              <img
+                src="{{ media | image_url: width: 160 }}"
+                alt=""
+                loading="lazy"
+                width="80"
+                height="80"
+              >
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="product__details">
+      {%- if section.settings.show_vendor and product.vendor != blank -%}
+        <p class="product__vendor">{{ product.vendor }}</p>
+      {%- endif -%}
+      <h1 class="product__title">{{ product.title }}</h1>
+
+      <div class="product__price" data-product-price>
+        {% render 'price', product: product %}
+      </div>
+
+      {%- assign current_variant = product.selected_or_first_available_variant -%}
+
+      {%- form 'product', product, class: 'product__form', data-product-form: '' -%}
+        {%- unless product.has_only_default_variant -%}
+          {%- for option in product.options_with_values -%}
+            <fieldset class="product__option" data-option-index="{{ forloop.index0 }}">
+              <legend class="product__option-name">{{ option.name }}</legend>
+              <div class="product__option-values">
+                {%- for value in option.values -%}
+                  <label class="product__option-value">
+                    <input
+                      type="radio"
+                      name="option-{{ option.name | handle }}"
+                      value="{{ value | escape }}"
+                      {% if option.selected_value == value %}checked{% endif %}
+                      data-option-value
+                    >
+                    <span>{{ value }}</span>
+                  </label>
+                {%- endfor -%}
+              </div>
+            </fieldset>
+          {%- endfor -%}
+        {%- endunless -%}
+
+        <input type="hidden" name="id" value="{{ current_variant.id }}" data-variant-id>
+
+        <div class="product__quantity">
+          <label for="Quantity-{{ section.id }}" class="product__option-name">{{ 'products.product.quantity' | t }}</label>
+          <div class="quantity-input">
+            <button type="button" class="quantity-input__button" data-quantity-minus aria-label="{{ 'products.product.decrease_quantity' | t }}">&minus;</button>
+            <input type="number" id="Quantity-{{ section.id }}" name="quantity" value="1" min="1" data-quantity-input>
+            <button type="button" class="quantity-input__button" data-quantity-plus aria-label="{{ 'products.product.increase_quantity' | t }}">+</button>
+          </div>
+        </div>
+
+        <div class="product__buttons">
+          <button
+            type="submit"
+            name="add"
+            class="button button--primary button--full"
+            data-add-to-cart
+            data-text-sold-out="{{ 'products.product.sold_out' | t }}"
+            data-text-unavailable="{{ 'products.product.unavailable' | t }}"
+            {% unless current_variant.available %}disabled{% endunless %}
+          >
+            {%- if current_variant.available -%}
+              {{ 'products.product.add_to_cart' | t }}
+            {%- else -%}
+              {{ 'products.product.sold_out' | t }}
+            {%- endif -%}
+          </button>
+          {%- if section.settings.show_dynamic_checkout -%}
+            {{ form | payment_button }}
+          {%- endif -%}
+        </div>
+      {%- endform -%}
+
+      {%- if product.description != blank -%}
+        <div class="product__description rte">
+          {{ product.description }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.shipping_note != blank -%}
+        <div class="product__shipping-note rte">{{ section.settings.shipping_note }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<script type="application/json" data-product-json>
+  {{ product.variants | json }}
+</script>
+
+{%- if section.settings.show_related -%}
+  <div class="related-products section-spacing page-width">
+    <div class="section-header">
+      <h2 class="section-header__title">{{ 'products.product.related_heading' | t }}</h2>
+    </div>
+    <div class="product-grid product-grid--4-col product-grid--carousel-mobile">
+      {%- for related in collections.all.products limit: 4 -%}
+        {%- unless related.id == product.id -%}
+          {% render 'product-card', product: related %}
+        {%- endunless -%}
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "商品ページ",
+  "settings": [
+    { "type": "checkbox", "id": "show_vendor", "label": "ブランド名を表示", "default": true },
+    { "type": "checkbox", "id": "show_dynamic_checkout", "label": "スピード購入ボタンを表示", "default": true },
+    { "type": "checkbox", "id": "show_related", "label": "関連商品を表示", "default": true },
+    { "type": "richtext", "id": "shipping_note", "label": "配送についての注記", "default": "<p>送料：全国一律 ¥800（税込）／沖縄・北海道 ¥1,200(税込)</p>" }
+  ]
+}
+{% endschema %}

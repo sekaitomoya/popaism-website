@@ -1,0 +1,76 @@
+{
+  "sections": {
+    "slideshow": {
+      "type": "slideshow",
+      "blocks": {
+        "slide-1": {
+          "type": "slide",
+          "settings": {
+            "subheading": "NEW COLLECTION",
+            "heading": "2026 SPRING / SUMMER",
+            "button_label": "SHOP NOW",
+            "position": "center"
+          }
+        },
+        "slide-2": {
+          "type": "slide",
+          "settings": {
+            "subheading": "PICK UP",
+            "heading": "SELECT BRANDS",
+            "button_label": "VIEW ALL",
+            "position": "center"
+          }
+        }
+      },
+      "block_order": ["slide-1", "slide-2"],
+      "settings": {
+        "height": "large",
+        "autoplay": true,
+        "interval": 5
+      }
+    },
+    "new-arrivals": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "NEW ARRIVALS",
+        "products_to_show": 8,
+        "columns": 4,
+        "show_view_all": true,
+        "carousel_mobile": true
+      }
+    },
+    "tops": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "TOPS",
+        "products_to_show": 4,
+        "columns": 4,
+        "show_view_all": true,
+        "carousel_mobile": true
+      }
+    },
+    "outer": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "OUTER",
+        "products_to_show": 4,
+        "columns": 4,
+        "show_view_all": true,
+        "carousel_mobile": true
+      }
+    },
+    "about": {
+      "type": "image-with-text",
+      "settings": {
+        "subheading": "ABOUT US",
+        "heading": "BRILLANTE OSAKA",
+        "button_label": "VIEW MORE"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {}
+    }
+  },
+  "order": ["slideshow", "new-arrivals", "tops", "outer", "about", "newsletter"]
+}

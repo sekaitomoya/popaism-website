@@ -1,0 +1,40 @@
+<div class="newsletter section-spacing" style="background: {{ section.settings.background }};">
+  <div class="page-width newsletter__inner">
+    <h2 class="newsletter__heading">{{ section.settings.heading | escape }}</h2>
+    {%- if section.settings.text != blank -%}
+      <p class="newsletter__text">{{ section.settings.text | escape }}</p>
+    {%- endif -%}
+    {%- form 'customer', class: 'newsletter__form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <div class="newsletter__field">
+        <input
+          type="email"
+          name="contact[email]"
+          placeholder="{{ 'general.newsletter.email_placeholder' | t }}"
+          aria-label="{{ 'general.newsletter.email_placeholder' | t }}"
+          required
+        >
+        <button type="submit" class="button button--primary">{{ 'general.newsletter.submit' | t }}</button>
+      </div>
+      {%- if form.posted_successfully? -%}
+        <p class="newsletter__success">{{ 'general.newsletter.success' | t }}</p>
+      {%- elsif form.errors -%}
+        <p class="newsletter__error">{{ form.errors.translated_fields.email }} {{ form.errors.messages.email }}</p>
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "ニュースレター",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "見出し", "default": "メルマガ登録で10%OFF" },
+    { "type": "text", "id": "text", "label": "説明文", "default": "新着アイテム・限定セールの情報をいち早くお届けします。" },
+    { "type": "color", "id": "background", "label": "背景色", "default": "#f5f5f5" }
+  ],
+  "presets": [
+    { "name": "ニュースレター" }
+  ]
+}
+{% endschema %}

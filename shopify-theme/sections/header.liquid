@@ -1,0 +1,135 @@
+<header class="header{% if section.settings.sticky %} header--sticky{% endif %}" data-header>
+  <div class="header__top page-width">
+    <button class="header__menu-toggle" data-drawer-open aria-label="{{ 'general.navigation.menu' | t }}" aria-expanded="false">
+      {% render 'icon', name: 'menu' %}
+    </button>
+
+    <h1 class="header__logo">
+      <a href="{{ routes.root_url }}">
+        {%- if section.settings.logo != blank -%}
+          <img
+            src="{{ section.settings.logo | image_url: width: 400 }}"
+            alt="{{ shop.name | escape }}"
+            width="{{ section.settings.logo.width }}"
+            height="{{ section.settings.logo.height }}"
+            style="max-width: {{ section.settings.logo_width }}px;"
+          >
+        {%- else -%}
+          <span class="header__logo-text">{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
+    </h1>
+
+    <form action="{{ routes.search_url }}" method="get" role="search" class="header__search">
+      <input
+        type="search"
+        name="q"
+        class="header__search-input"
+        placeholder="{{ 'general.search.placeholder' | t }}"
+        aria-label="{{ 'general.search.placeholder' | t }}"
+      >
+      <button type="submit" class="header__search-submit" aria-label="{{ 'general.search.submit' | t }}">
+        {% render 'icon', name: 'search' %}
+      </button>
+    </form>
+
+    <div class="header__icons">
+      <a href="{{ routes.search_url }}" class="header__icon header__icon--search-mobile" aria-label="{{ 'general.search.submit' | t }}">
+        {% render 'icon', name: 'search' %}
+      </a>
+      {%- if section.settings.show_account and shop.customer_accounts_enabled -%}
+        <a href="{{ routes.account_url }}" class="header__icon" aria-label="{{ 'general.navigation.account' | t }}">
+          {% render 'icon', name: 'account' %}
+        </a>
+      {%- endif -%}
+      <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart" aria-label="{{ 'general.navigation.cart' | t }}">
+        {% render 'icon', name: 'cart' %}
+        <span class="header__cart-count{% if cart.item_count == 0 %} is-empty{% endif %}">{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+
+  <nav class="header__nav page-width" role="navigation" aria-label="{{ 'general.navigation.menu' | t }}">
+    <ul class="header__menu">
+      {%- for link in section.settings.menu.links -%}
+        <li class="header__menu-item{% if link.links.size > 0 %} has-dropdown{% endif %}">
+          <a href="{{ link.url }}" class="header__menu-link{% if link.active or link.child_active %} is-active{% endif %}">
+            {{ link.title }}
+            {%- if link.links.size > 0 %} {% render 'icon', name: 'chevron-down' %}{% endif -%}
+          </a>
+          {%- if link.links.size > 0 -%}
+            <ul class="header__dropdown">
+              {%- for child in link.links -%}
+                <li>
+                  <a href="{{ child.url }}" class="header__dropdown-link">{{ child.title }}</a>
+                  {%- if child.links.size > 0 -%}
+                    <ul class="header__dropdown-sub">
+                      {%- for grandchild in child.links -%}
+                        <li><a href="{{ grandchild.url }}" class="header__dropdown-link header__dropdown-link--sub">{{ grandchild.title }}</a></li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </nav>
+</header>
+
+<div class="drawer" data-drawer hidden>
+  <div class="drawer__overlay" data-drawer-close></div>
+  <div class="drawer__panel">
+    <div class="drawer__header">
+      <span class="drawer__title">{{ shop.name }}</span>
+      <button class="drawer__close" data-drawer-close aria-label="{{ 'accessibility.close' | t }}">
+        {% render 'icon', name: 'close' %}
+      </button>
+    </div>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="drawer__search">
+      <input type="search" name="q" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.placeholder' | t }}">
+      <button type="submit" aria-label="{{ 'general.search.submit' | t }}">{% render 'icon', name: 'search' %}</button>
+    </form>
+    <ul class="drawer__menu">
+      {%- for link in section.settings.menu.links -%}
+        <li class="drawer__menu-item">
+          {%- if link.links.size > 0 -%}
+            <details>
+              <summary class="drawer__menu-link">
+                {{ link.title }} {% render 'icon', name: 'chevron-down' %}
+              </summary>
+              <ul class="drawer__submenu">
+                <li><a href="{{ link.url }}" class="drawer__submenu-link">{{ 'general.navigation.view_all' | t }}</a></li>
+                {%- for child in link.links -%}
+                  <li>
+                    <a href="{{ child.url }}" class="drawer__submenu-link">{{ child.title }}</a>
+                    {%- for grandchild in child.links -%}
+                      <a href="{{ grandchild.url }}" class="drawer__submenu-link drawer__submenu-link--sub">{{ grandchild.title }}</a>
+                    {%- endfor -%}
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </details>
+          {%- else -%}
+            <a href="{{ link.url }}" class="drawer__menu-link">{{ link.title }}</a>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "ヘッダー",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "ロゴ画像" },
+    { "type": "range", "id": "logo_width", "label": "ロゴ幅", "min": 80, "max": 300, "step": 10, "unit": "px", "default": 160 },
+    { "type": "link_list", "id": "menu", "label": "メニュー", "default": "main-menu" },
+    { "type": "checkbox", "id": "sticky", "label": "スクロール時に固定", "default": true },
+    { "type": "checkbox", "id": "show_account", "label": "アカウントアイコンを表示", "default": false }
+  ]
+}
+{% endschema %}

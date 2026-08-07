@@ -1,0 +1,110 @@
+{
+  "accessibility": {
+    "skip_to_content": "コンテンツへスキップ",
+    "close": "閉じる"
+  },
+  "general": {
+    "meta": {
+      "tags": "タグ: {{ tags }}",
+      "page": "{{ page }}ページ目"
+    },
+    "navigation": {
+      "menu": "メニュー",
+      "account": "アカウント",
+      "cart": "カート",
+      "view_all": "すべて見る"
+    },
+    "search": {
+      "title": "検索",
+      "placeholder": "商品を検索",
+      "submit": "検索",
+      "results_with_count": "「{{ terms }}」の検索結果 {{ count }}件",
+      "no_results": "「{{ terms }}」に一致する商品が見つかりませんでした"
+    },
+    "newsletter": {
+      "heading": "NEWSLETTER",
+      "email_placeholder": "メールアドレス",
+      "submit": "登録する",
+      "success": "ご登録ありがとうございます。"
+    },
+    "pagination": {
+      "label": "ページ送り",
+      "previous": "前のページ",
+      "next": "次のページ"
+    },
+    "footer": {
+      "menu": "MENU"
+    },
+    "404": {
+      "text": "お探しのページは見つかりませんでした。",
+      "back_home": "トップページへ戻る"
+    }
+  },
+  "sections": {
+    "slideshow": {
+      "slide": "スライド{{ number }}"
+    },
+    "featured_collection": {
+      "view_all": "もっと見る",
+      "placeholder_title": "商品名がここに入ります"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "カートに入れる",
+      "sold_out": "SOLD OUT",
+      "on_sale": "SALE",
+      "tax_included": "税込",
+      "quantity": "数量",
+      "decrease_quantity": "数量を減らす",
+      "increase_quantity": "数量を増やす",
+      "unavailable": "選択できません",
+      "media_thumbnail": "画像{{ index }}を表示",
+      "related_heading": "RECOMMEND"
+    }
+  },
+  "collections": {
+    "general": {
+      "list_title": "CATEGORY",
+      "product_count": "{{ count }}件の商品",
+      "no_matches": "このカテゴリには商品がありません。"
+    },
+    "sorting": {
+      "title": "並び替え"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "ショッピングカート",
+      "product": "商品",
+      "price": "価格",
+      "quantity": "数量",
+      "total": "小計",
+      "subtotal": "合計",
+      "tax_note": "税込価格。送料はチェックアウト時に計算されます。",
+      "note": "ご注文に関する備考",
+      "update": "カートを更新",
+      "checkout": "ご購入手続きへ",
+      "remove": "削除",
+      "empty": "カートは空です。",
+      "continue_shopping": "お買い物を続ける"
+    }
+  },
+  "blogs": {
+    "article": {
+      "back_to_blog": "ブログ一覧へ戻る"
+    }
+  },
+  "contact": {
+    "form": {
+      "title": "お問い合わせ",
+      "name": "お名前",
+      "email": "メールアドレス",
+      "phone": "電話番号（任意）",
+      "message": "お問い合わせ内容",
+      "send": "送信する",
+      "success": "お問い合わせを送信しました。担当者よりご連絡いたします。",
+      "error": "入力内容をご確認ください。"
+    }
+  }
+}

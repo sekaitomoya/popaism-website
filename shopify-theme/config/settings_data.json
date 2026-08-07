@@ -1,0 +1,23 @@
+{
+  "current": {
+    "color_text": "#000000",
+    "color_heading": "#282828",
+    "color_background": "#ffffff",
+    "color_background_secondary": "#f5f5f5",
+    "color_border": "#d9d9d9",
+    "color_accent": "#282828",
+    "color_sale": "#de2a2a",
+    "color_sold_out": "#6f719b",
+    "color_button_background": "#282828",
+    "color_button_text": "#ffffff",
+    "heading_font": "assistant_n8",
+    "body_font": "assistant_n4",
+    "heading_uppercase": true,
+    "page_width": 1400,
+    "button_radius": 24,
+    "card_show_vendor": true,
+    "card_hover_image": true,
+    "card_image_ratio": "portrait",
+    "social_instagram": "https://www.instagram.com/brillante__official/"
+  }
+}

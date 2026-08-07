@@ -1,0 +1,33 @@
+<div class="list-collections section-spacing page-width">
+  <header class="collection__header">
+    <h1 class="collection__title">{{ 'collections.general.list_title' | t }}</h1>
+  </header>
+
+  <div class="list-collections__grid">
+    {%- for collection in collections -%}
+      <a href="{{ collection.url }}" class="list-collections__card">
+        <div class="list-collections__media">
+          {%- if collection.featured_image -%}
+            <img
+              src="{{ collection.featured_image | image_url: width: 720 }}"
+              alt="{{ collection.title | escape }}"
+              loading="lazy"
+              width="{{ collection.featured_image.width }}"
+              height="{{ collection.featured_image.height }}"
+            >
+          {%- else -%}
+            {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+        <span class="list-collections__title">{{ collection.title }}</span>
+      </a>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "コレクション一覧",
+  "settings": []
+}
+{% endschema %}

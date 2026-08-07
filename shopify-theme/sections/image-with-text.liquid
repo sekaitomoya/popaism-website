@@ -1,0 +1,49 @@
+<div class="image-with-text section-spacing{% if section.settings.reverse %} image-with-text--reverse{% endif %}">
+  <div class="page-width image-with-text__grid">
+    <div class="image-with-text__media">
+      {%- if section.settings.image != blank -%}
+        <img
+          src="{{ section.settings.image | image_url: width: 1200 }}"
+          alt="{{ section.settings.image.alt | escape }}"
+          loading="lazy"
+          width="{{ section.settings.image.width }}"
+          height="{{ section.settings.image.height }}"
+        >
+      {%- else -%}
+        {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+    <div class="image-with-text__content">
+      {%- if section.settings.subheading != blank -%}
+        <p class="image-with-text__subheading">{{ section.settings.subheading | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="image-with-text__heading">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="image-with-text__text rte">{{ section.settings.text }}</div>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ section.settings.button_link }}" class="button button--secondary">{{ section.settings.button_label | escape }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "画像＋テキスト",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "画像" },
+    { "type": "text", "id": "subheading", "label": "サブ見出し", "default": "ABOUT US" },
+    { "type": "text", "id": "heading", "label": "見出し", "default": "BRILLANTE OSAKA" },
+    { "type": "richtext", "id": "text", "label": "テキスト", "default": "<p>国内外のブランドにこだわらず常に最新のトレンドをキャッチ。注目ブランドから希少なブランドまで、固定観念にとらわれない視点でセレクトしたアイテムを取り揃えるセレクトショップです。</p>" },
+    { "type": "text", "id": "button_label", "label": "ボタンラベル", "default": "VIEW MORE" },
+    { "type": "url", "id": "button_link", "label": "ボタンリンク" },
+    { "type": "checkbox", "id": "reverse", "label": "画像とテキストを左右入替", "default": false }
+  ],
+  "presets": [
+    { "name": "画像＋テキスト" }
+  ]
+}
+{% endschema %}
