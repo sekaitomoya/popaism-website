@@ -865,3 +865,27 @@
 @media (max-width: 768px) {
   .nav-logo-img--wide { height: 28px; }
 }
+
+/* 文字をリンクスのロゴ（明朝系のセリフ体）に寄せる。見出し・数字・英字ラベルは明朝、本文とボタンはゴシックのまま */
+body.bp h1, body.bp h2, body.bp h3,
+.hero-title, .section-title, .service-title, .cta-title,
+.bp-cause-label, .bp-cost-card-title, .bp-step-title, .bp-highlight-num,
+.bp-shots-title, .bp-report-band-title, .bp-plan-name, .bp-plan-price,
+.bp-report-item-title, .bp-includes-title, .bp-chain-title, .bp-hero-pillar strong {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.hero-title { font-weight: 900; letter-spacing: 0.01em; }
+.counter-value, .counter-static, .counter-number, .service-number, .bp-step-num,
+.bp-cost-amount, .bp-cost-total-val, .bp-cost-after-total strong,
+.bp-highlight-num strong, .bp-plan-price strong {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 700;
+}
+.hero-tag, .section-eyebrow, .service-en, .bp-step-en, .bp-plan-en,
+.bp-cost-card-label, .bp-cost-field, .bp-hero-pillar-label {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+}
