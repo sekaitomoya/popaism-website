@@ -858,3 +858,10 @@
 .bp-chain-band-text strong { color: var(--teal); font-weight: 900; }
 @media (max-width: 960px) { .bp-chain { grid-template-columns: repeat(3, 1fr); } .bp-chain-step:nth-child(4)::before, .bp-chain-step:nth-child(4)::after { display: none; } }
 @media (max-width: 600px) { .bp-chain { grid-template-columns: repeat(2, 1fr); } .bp-chain-step:nth-child(3)::before, .bp-chain-step:nth-child(3)::after, .bp-chain-step:nth-child(5)::before, .bp-chain-step:nth-child(5)::after { display: none; } .bp-chain-band { flex-direction: column; align-items: flex-start; } .bp-hero-pillar { min-width: 0; width: 100%; } }
+
+/* リンクスのロゴ（横長） */
+.nav-logo-img--wide { height: 34px; border-radius: 0; margin-top: 0; }
+.footer-logo-img--wide { height: 40px; border-radius: 0; margin-top: 0; }
+@media (max-width: 768px) {
+  .nav-logo-img--wide { height: 28px; }
+}
