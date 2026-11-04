@@ -911,5 +911,13 @@
   .counter-number, .counter-static { font-size: 36px; }
 }
 
+/* セクションの間の縦の余白を詰める（上下120pxずつ＝間が240pxあって間延びしていた） */
+.bp .section { padding: 60px 0; }
+.bp .section-header { margin-bottom: 44px; }
+@media (max-width: 768px) {
+  .bp .section { padding: 44px 0; }
+  .bp .section-header { margin-bottom: 32px; }
+}
+
 /* 対応範囲のカードは題名が上にあるので、右上の番号の下に題名を下げて重なりを避ける */
 #target .service-title { margin-top: 44px; }
