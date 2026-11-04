@@ -842,12 +842,13 @@
 
 /* 2026-10-16: 企画→物流の工程図 */
 .bp-chain-section { background: var(--white); }
-.bp-chain { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; counter-reset: chain; }
+.bp-chain { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: 24px; counter-reset: chain; }
 .bp-chain-step { position: relative; background: var(--offwhite); border: 1px solid var(--gray-light); border-top: 4px solid var(--bp-accent, var(--teal)); border-radius: 14px; padding: 22px 14px 18px; text-align: center; min-width: 0; }
 .bp-chain-step.bp-c-teal { --bp-accent: var(--teal); } .bp-chain-step.bp-c-blue { --bp-accent: var(--blue); }
 .bp-chain-step.bp-c-indigo { --bp-accent: var(--indigo); } .bp-chain-step.bp-c-purple { --bp-accent: var(--purple); }
-.bp-chain-step + .bp-chain-step::before { content: ""; position: absolute; left: -12px; top: 50%; width: 12px; height: 2px; background: var(--gray-light); }
-.bp-chain-step + .bp-chain-step::after { content: ""; position: absolute; left: -4px; top: calc(50% - 4px); width: 6px; height: 6px; border-top: 2px solid var(--gray); border-right: 2px solid var(--gray); transform: rotate(45deg); }
+/* 矢印はカードの間のすき間の真ん中、アイコンの高さに置く（左揃えにした文字とぶつからないように） */
+.bp-chain-step + .bp-chain-step::before { content: ""; position: absolute; left: -20px; top: 53px; width: 13px; height: 2px; background: var(--gray); }
+.bp-chain-step + .bp-chain-step::after { content: ""; position: absolute; left: -13px; top: 50px; width: 6px; height: 6px; border-top: 2px solid var(--gray); border-right: 2px solid var(--gray); transform: rotate(45deg); }
 .bp-chain-icon { display: inline-flex; width: 64px; height: 64px; border-radius: 50%; background: var(--white); color: var(--bp-accent, var(--teal)); align-items: center; justify-content: center; border: 1.5px solid var(--bp-accent, var(--teal)); margin-bottom: 10px; }
 .bp-chain-icon svg { width: 36px; height: 36px; }
 .bp-chain-stage { display: block; font-size: 11px; font-weight: 700; letter-spacing: .14em; color: var(--bp-accent, var(--teal)); }
@@ -875,6 +876,14 @@
 .bp-highlight, .bp-shots-title, .bp-report-band-title, .bp-report-band-lead,
 .bp-includes-band, .bp-plan-sub, .bp-chain-step, .cta-content { text-align: left; }
 .bp-includes-list { justify-content: flex-start; }
+
+/* 青い帯：広告運用・マーケの中身を3つの札で見せる */
+.bp-highlight { max-width: 1040px; }
+.bp-highlight-points { list-style: none; margin: 28px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; position: relative; }
+.bp-highlight-points li { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.28); border-radius: 12px; padding: 18px 18px 16px; }
+.bp-highlight-points strong { display: block; font-size: 16px; font-weight: 900; margin-bottom: 6px; color: var(--white); }
+.bp-highlight-points span { display: block; font-size: 13.5px; line-height: 1.75; color: rgba(255,255,255,0.9); }
+@media (max-width: 768px) { .bp-highlight { padding: 32px 22px; } .bp-highlight-num { font-size: 21px; } .bp-highlight-num br { display: none; } .bp-highlight-points { grid-template-columns: 1fr; } }
 
 /* 対応範囲のカードは題名が上にあるので、右上の番号の下に題名を下げて重なりを避ける */
 #target .service-title { margin-top: 44px; }
