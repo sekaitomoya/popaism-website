@@ -12,7 +12,7 @@
   <!-- 【要記入】公開時に og:url / og:image / canonical を設定してください -->
   <link rel="stylesheet" href="fonts/fonts.css">
   <link rel="stylesheet" href="css/style.css?v=20261104a">
-  <link rel="stylesheet" href="css/bp.css?v=20261104e">
+  <link rel="stylesheet" href="css/bp.css?v=20261104f">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -185,14 +185,14 @@
         <div class="bp-cost-card">
           <span class="bp-cost-card-label">Before</span>
           <h3 class="bp-cost-card-title">一般的な代理店にバラバラ発注している場合</h3>
-          <p class="bp-cost-hint">それぞれの費用（万円）を入力すると、合計が表示されます。</p>
+          <p class="bp-cost-hint"><span class="bp-cost-hint-icon" aria-hidden="true">✎</span>枠に、いま毎月の費用（万円）を入れてみてください</p>
           <ul class="bp-cost-list" id="bp-cost-sim">
-            <li><label for="bp-cost-1">広告代理店の運用手数料</label><span class="bp-cost-amount"><input type="text" inputmode="decimal" class="bp-cost-field" id="bp-cost-1" placeholder="0" aria-label="広告代理店の運用手数料（万円）">万円</span></li>
-            <li><label for="bp-cost-2">クリエイティブ・LP制作費</label><span class="bp-cost-amount"><input type="text" inputmode="decimal" class="bp-cost-field" id="bp-cost-2" placeholder="0" aria-label="クリエイティブ・LP制作費（万円）">万円</span></li>
-            <li><label for="bp-cost-3">ECカート／ツール費用</label><span class="bp-cost-amount"><input type="text" inputmode="decimal" class="bp-cost-field" id="bp-cost-3" placeholder="0" aria-label="ECカート／ツール費用（万円）">万円</span></li>
-            <li><label for="bp-cost-4">コンサル・顧問料</label><span class="bp-cost-amount"><input type="text" inputmode="decimal" class="bp-cost-field" id="bp-cost-4" placeholder="0" aria-label="コンサル・顧問料（万円）">万円</span></li>
+            <li><label for="bp-cost-1">広告代理店の運用手数料</label><span class="bp-cost-amount"><input type="text" inputmode="decimal" class="bp-cost-field bp-cost-field--prompt" id="bp-cost-1" placeholder="例：10" aria-label="広告代理店の運用手数料（万円）">万円</span></li>
+            <li><label for="bp-cost-2">クリエイティブ・LP制作費</label><span class="bp-cost-amount"><input type="text" inputmode="decimal" class="bp-cost-field bp-cost-field--prompt" id="bp-cost-2" placeholder="例：10" aria-label="クリエイティブ・LP制作費（万円）">万円</span></li>
+            <li><label for="bp-cost-3">ECカート／ツール費用</label><span class="bp-cost-amount"><input type="text" inputmode="decimal" class="bp-cost-field bp-cost-field--prompt" id="bp-cost-3" placeholder="例：10" aria-label="ECカート／ツール費用（万円）">万円</span></li>
+            <li><label for="bp-cost-4">コンサル・顧問料</label><span class="bp-cost-amount"><input type="text" inputmode="decimal" class="bp-cost-field bp-cost-field--prompt" id="bp-cost-4" placeholder="例：10" aria-label="コンサル・顧問料（万円）">万円</span></li>
           </ul>
-          <p class="bp-cost-total">合計<span><span class="bp-cost-total-val" id="bp-cost-total-val">0</span><span class="bp-cost-total-unit">万円/月</span></span></p>
+          <p class="bp-cost-total">合計（自動で計算）<span><span class="bp-cost-total-val" id="bp-cost-total-val">0</span><span class="bp-cost-total-unit">万円/月</span></span></p>
         </div>
         <div class="bp-cost-card bp-cost-card--after bp-c-teal">
           <span class="bp-cost-card-label">After</span>
@@ -613,6 +613,6 @@
   <!-- ===== SCRIPTS ===== -->
   <script src="js/vendor/gsap.min.js"></script>
   <script src="js/vendor/ScrollTrigger.min.js"></script>
-  <script src="js/bp.js?v=20261104e"></script>
+  <script src="js/bp.js?v=20261104f"></script>
 </body>
 </html>

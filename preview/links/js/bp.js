@@ -34,7 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const rounded = Math.round(total * 10) / 10;
       costTotal.textContent = rounded.toLocaleString('ja-JP');
     };
-    fields.forEach(f => f.addEventListener('input', update));
+    fields.forEach(f => f.addEventListener('input', () => {
+      fields.forEach(x => x.classList.remove('bp-cost-field--prompt'));
+      update();
+    }));
     update();
   }
 
