@@ -540,15 +540,14 @@
 }
 .bp-shot-img {
   width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover; /* 枠いっぱいに敷き、上下左右の余白を出さない（はみ出す分は下と右を切る） */
-  object-position: left top;
+  aspect-ratio: 3 / 4;
+  object-fit: contain;
   background: var(--offwhite);
   border-bottom: 1px solid var(--gray-light);
-  padding: 0;
+  padding: 12px;
 }
 .bp-shot-ph {
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 3 / 4;
   display: none;
   align-items: center;
   justify-content: center;
