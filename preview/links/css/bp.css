@@ -72,6 +72,7 @@
    ============================================ */
 .bp .hero-content { max-width: 900px; }
 .bp .hero-title { font-size: clamp(32px, 4.5vw, 62px); }
+.bp .hero-sub { max-width: 640px; }
 .bp-br-sp { display: none; }
 @media (max-width: 768px) {
   .bp-br-sp { display: inline; }
@@ -866,29 +867,14 @@
   .nav-logo-img--wide { height: 28px; }
 }
 
-/* 文字をリンクスのロゴ（明朝系のセリフ体）に寄せる。見出し・数字・英字ラベルは明朝、本文とボタンはゴシックのまま */
-body.bp h1, body.bp h2, body.bp h3,
-.hero-title, .section-title, .service-title, .cta-title,
-.bp-cause-label, .bp-cost-card-title, .bp-step-title, .bp-highlight-num,
-.bp-shots-title, .bp-report-band-title, .bp-plan-name, .bp-plan-price,
-.bp-report-item-title, .bp-includes-title, .bp-chain-title, .bp-hero-pillar strong {
-  font-family: 'Noto Serif JP', serif;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
+/* 文字はゴシック（Noto Sans JP）でそろえる（2026-11-02 定例で畑中様「左揃えでゴシック中心の見やすい形に」）。見出しの太さだけ指定 */
 .hero-title { font-weight: 900; letter-spacing: 0.01em; }
-.counter-value, .counter-static, .counter-number, .service-number, .bp-step-num,
-.bp-cost-amount, .bp-cost-total-val, .bp-cost-after-total strong,
-.bp-highlight-num strong, .bp-plan-price strong {
-  font-family: 'Noto Serif JP', serif;
-  font-weight: 700;
-}
-.hero-tag, .section-eyebrow, .service-en, .bp-step-en, .bp-plan-en,
-.bp-cost-card-label, .bp-cost-field, .bp-hero-pillar-label {
-  font-family: 'Noto Serif JP', serif;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-}
+
+/* 見出しと説明の文は左揃えでそろえる（2026-11-02 定例で畑中様。数字の帯とボタンは中央のまま） */
+.section-header { text-align: left; }
+.bp-highlight, .bp-shots-title, .bp-report-band-title, .bp-report-band-lead,
+.bp-includes-band, .bp-plan-sub, .bp-chain-step, .cta-content { text-align: left; }
+.bp-includes-list { justify-content: flex-start; }
 
 /* 対応範囲のカードは題名が上にあるので、右上の番号の下に題名を下げて重なりを避ける */
 #target .service-title { margin-top: 44px; }
