@@ -63,26 +63,33 @@ document.addEventListener('DOMContentLoaded', () => {
     ease: 'power2.out'
   });
 
-  /* ===== COUNTER UP ===== */
+  /* ===== COUNTER UP（data-from があればそこから数え下げる。0円・0% を「減っていく」動きで見せる） ===== */
+  gsap.from('.counter-item', {
+    scrollTrigger: { trigger: '.counter-bar', start: 'top 85%' },
+    opacity: 0,
+    y: 32,
+    stagger: 0.12,
+    duration: 0.7,
+    ease: 'power2.out'
+  });
   document.querySelectorAll('.counter-number').forEach(el => {
     const target = parseInt(el.dataset.target, 10);
     if (Number.isNaN(target)) return;
+    const from = parseInt(el.dataset.from || '0', 10);
+    const show = v => { el.textContent = Math.round(v).toLocaleString('ja-JP'); };
+    show(from);
     ScrollTrigger.create({
       trigger: el,
       start: 'top 85%',
       once: true,
       onEnter: () => {
-        const obj = { val: 0 };
+        const obj = { val: from };
         gsap.to(obj, {
           val: target,
           duration: 2,
           ease: 'power2.out',
-          onUpdate: () => {
-            el.textContent = Math.ceil(obj.val);
-          },
-          onComplete: () => {
-            el.textContent = target;
-          }
+          onUpdate: () => show(obj.val),
+          onComplete: () => show(target)
         });
       }
     });

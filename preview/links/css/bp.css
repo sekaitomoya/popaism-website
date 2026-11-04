@@ -524,10 +524,11 @@
 .bp-shot-img {
   width: 100%;
   aspect-ratio: 4 / 5;
-  object-fit: contain;
+  object-fit: cover; /* 枠いっぱいに敷き、上下左右の余白を出さない（はみ出す分は下と右を切る） */
+  object-position: left top;
   background: var(--offwhite);
   border-bottom: 1px solid var(--gray-light);
-  padding: 8px;
+  padding: 0;
 }
 .bp-shot-ph {
   aspect-ratio: 4 / 5;
@@ -883,6 +884,15 @@
 .bp-highlight-points strong { display: block; font-size: 16px; font-weight: 900; margin-bottom: 6px; color: var(--white); }
 .bp-highlight-points span { display: block; font-size: 13.5px; line-height: 1.75; color: rgba(255,255,255,0.9); }
 @media (max-width: 768px) { .bp-highlight { padding: 32px 22px; } .bp-highlight-num { font-size: 21px; } .bp-highlight-num br { display: none; } .bp-highlight-points { grid-template-columns: 1fr; } }
+
+/* 数字の帯：数え下げの途中（100,000など）で幅が揺れないよう桁幅をそろえ、スマホでは2列を均等にする */
+.counter-number { font-variant-numeric: tabular-nums; }
+@media (max-width: 768px) {
+  .bp .counter-bar-inner { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bp .counter-item { padding-left: 6px; padding-right: 6px; }
+  .bp .counter-label { letter-spacing: 0.02em; }
+  .counter-number, .counter-static { font-size: 36px; }
+}
 
 /* 対応範囲のカードは題名が上にあるので、右上の番号の下に題名を下げて重なりを避ける */
 #target .service-title { margin-top: 44px; }
